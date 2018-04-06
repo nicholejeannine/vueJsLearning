@@ -16,18 +16,19 @@
 <body>
 <div id="app" class="container">
 	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="text-center text-danger">Cards</h1>
+		<div class="col-lg-offset-5 col-lg-6">
+			<button @click="showModal=true" class="btn btn-lg btn-primary">Show Modal</button>
 		</div>
 	</div>
-	<hr/>
 	<div class="row">
-		<message title="Hello World" body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis."></message>
-		<message title="A second message" body="A second body."></message>
+		<div class="col-lg-offset-3 col-lg-6">
+			<!-- Custom event, close. If my modal announces that it has closed, then we can update showModal to be false. -->
+			<my-modal v-if="showModal" @close="showModal = false">This uses a slot, not a property.</my-modal>
+		</div>
 	</div>
 </div>
 
-<script src="main.js"></script>
+<script src="modal.js"></script>
 </body>
 
 </html>
