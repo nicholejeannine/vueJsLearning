@@ -23,19 +23,12 @@
 	<div class="row">
 		<div class="col-lg-12">
 				<!-- I can use the message variable and output it without using v-model by using the {{}} syntax still: -->
-			<h1 class="text-center">{{message}}</h1>
-		
-			
+			<h1 class="text-center">{{reversedMessage}}</h1>
+
 			<ul>
-				<li v-for="name in names" v-text="name"></li>
+
+
 			</ul>
-
-				<!-- v-model is a Vue directive which lets you deal with form inputs and controls. Note the syntax does not use {{}} here (unlike angular). -->
-			<input v-model="newName" id="input" type="text"/>
-			<button @click="addName" id="addName" class="btn btn-sm btn-primary">Add a name</button>
-			<button class="btn btn-sm btn-danger" :title="title">Hover over me</button>
-			<button :class="{'btn btn-sm btn-warning': isWarning}" @click="toggleClass">Click To Toggle Class</button>
-
 
 		</div>
 	</div>
@@ -47,22 +40,19 @@
 var app = new Vue({
 	el: "#app",
 	data: {
-		message: "Hello Vue!",
-		newName: '',
-		names: ['Joe', 'Mary', 'Jane', 'Jackie'],
-		title: "This is a title set through Javascript",
-		isWarning: false
+		
+		message: "Hello World!"
+	},
+	// the computed object lets you compute properties before they are displayed on the page.
+	computed: {
+		reversedMessage() {
+		  return this.message.split('').reverse().join();
+		}
 	},
 
 	// any custom methods we write should be nested within the "methods" object:
 	methods: {
-		addName() {
-			this.names.push(this.newName);
-			this.newName = '';
-		},
-		toggleClass() { 
-			this.isWarning = !this.isWarning;
-		}
+		
 	},
 
 });
