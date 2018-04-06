@@ -33,7 +33,7 @@
 				<!-- v-model is a Vue directive which lets you deal with form inputs and controls. Note the syntax does not use {{}} here (unlike angular). -->
 			<input v-model="newName" id="input" type="text"/>
 			<button @click="addName" id="addName" class="btn btn-sm btn-primary">Add a name</button>
-			<button class="btn btn-sm btn-danger" v-bind:title="title">Hover over me</button>
+			<button class="btn btn-sm btn-danger" :title="title">Hover over me</button>
 
 
 		</div>
