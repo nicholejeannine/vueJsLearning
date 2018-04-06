@@ -22,10 +22,21 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="text-center">Hello!</h1>
+			<h1 class="text-center">hi Vue!</h1>
+			<input type="text" id="input">
 		</div>
 	</div>
 </div>
+
+<script>
+let data = {
+	message: "Hello World!"
+};
+// here is the "regular js" way to do it: dive into the dom and use query selectors.
+document.querySelector("#input").value = data.message;
+
+// then you also have to set up an "on click" event, etc.
+</script>
 </body>
 
 </html>
