@@ -47,15 +47,20 @@ var app = new Vue({
 	data: {
 		message: "Hello Vue!",
 		names: ['Joe', 'Mary', 'Jane', 'Jackie']
+	},
+
+	// the mounted function will be triggered by vue once the instance has been mounted; once everything has been registered and is ready to go, what do you want to do?
+	mounted() {
+		document.querySelector("#addName").addEventListener("click", () => {
+		let name = document.querySelector("#input").value;
+		app.names.push(name);
+		document.querySelector("#input").value = "";
+});
 	}
 });
 
 // longform way of making the button add a name to the list.
-document.querySelector("#addName").addEventListener("click", () => {
-	let name = document.querySelector("#input").value;
-	app.names.push(name);
-	document.querySelector("#input").value = "";
-});
+
 </script>
 </body>
 
