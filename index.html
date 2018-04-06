@@ -23,11 +23,10 @@
 	<div class="row">
 		<div class="col-lg-12">
 				<!-- I can use the message variable and output it without using v-model by using the {{}} syntax still: -->
-			<h1 class="text-center">{{reversedMessage}}</h1>
+			<h1 class="text-center">Tasks</h1>
 
 			<ul>
-
-
+				<li v-if="task.completed" v-for="task in tasks" v-text="task.description"></li>
 			</ul>
 
 		</div>
@@ -40,14 +39,33 @@
 var app = new Vue({
 	el: "#app",
 	data: {
-		
+		tasks: [
+			{
+				description: "Go to the store",
+				completed: true
+			},
+			{
+				description: "Finish screencast",
+				completed: false
+			},
+			{
+				description: "Work on resume",
+				completed: false
+			},
+			{
+				description: "Do another thing",
+				completed: true
+			},
+			{
+				description: "Make more tasks",
+				completed: true
+			}
+		],
 		message: "Hello World!"
 	},
 	// the computed object lets you compute properties before they are displayed on the page.
 	computed: {
-		reversedMessage() {
-		  return this.message.split('').reverse().join();
-		}
+		
 	},
 
 	// any custom methods we write should be nested within the "methods" object:
