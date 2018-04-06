@@ -29,7 +29,7 @@
 			<p class="text-center text-danger">Your text box says: {{message}}</p>
 
 			<ul>
-				<li v-for="name in names">{{name}}</li>
+				<li v-for="name in names" v-text="name"></li>
 			</ul>
 		</div>
 	</div>
