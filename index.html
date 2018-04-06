@@ -27,6 +27,10 @@
 			<input type="text" id="input" v-model="message">
 			<!-- I can use the message variable and output it without using v-model by using the {{}} syntax still: -->
 			<p class="text-center text-danger">Your text box says: {{message}}</p>
+
+			<ul>
+				<li v-for="name in names">{{name}}</li>
+			</ul>
 		</div>
 	</div>
 </div>
@@ -37,7 +41,8 @@
 new Vue({
 	el: "#app",
 	data: {
-		message: "Hello World!"
+		message: "This is a message",
+		names: ['Joe', 'Mary', 'Jane', 'Jackie']
 	}
 });
 </script>
