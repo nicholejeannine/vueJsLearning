@@ -33,6 +33,7 @@
 				<!-- v-model is a Vue directive which lets you deal with form inputs and controls. Note the syntax does not use {{}} here (unlike angular). -->
 			<input v-model="newName" id="input" type="text"/>
 			<button @click="addName" id="addName" class="btn btn-sm btn-primary">Add a name</button>
+			<button class="btn btn-sm btn-danger" v-bind:title="title">Hover over me</button>
 
 
 		</div>
@@ -47,7 +48,8 @@ var app = new Vue({
 	data: {
 		message: "Hello Vue!",
 		newName: '',
-		names: ['Joe', 'Mary', 'Jane', 'Jackie']
+		names: ['Joe', 'Mary', 'Jane', 'Jackie'],
+		title: "This is a title set through Javascript"
 	},
 
 	// any custom methods we write should be nested within the "methods" object:
@@ -58,17 +60,7 @@ var app = new Vue({
 		}
 	},
 
-	// the mounted function will be triggered by vue once the instance has been mounted; once everything has been registered and is ready to go, what do you want to do?
-// 	mounted() {
-// 		document.querySelector("#addName").addEventListener("click", () => {
-// 		let name = document.querySelector("#input").value;
-// 		app.names.push(name);
-// 		document.querySelector("#input").value = "";
-// });
-// 	}
 });
-
-// longform way of making the button add a name to the list.
 
 </script>
 </body>
