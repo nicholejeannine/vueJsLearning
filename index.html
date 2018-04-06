@@ -34,7 +34,7 @@
 			<input v-model="newName" id="input" type="text"/>
 			<button @click="addName" id="addName" class="btn btn-sm btn-primary">Add a name</button>
 			<button class="btn btn-sm btn-danger" :title="title">Hover over me</button>
-			<button :class="{'btn btn-sm btn-warning': isWarning}">Btn-warning if true</button>
+			<button :class="{'btn btn-sm btn-warning': isWarning}" @click="toggleClass">Click To Toggle Class</button>
 
 
 		</div>
@@ -50,7 +50,8 @@ var app = new Vue({
 		message: "Hello Vue!",
 		newName: '',
 		names: ['Joe', 'Mary', 'Jane', 'Jackie'],
-		title: "This is a title set through Javascript"
+		title: "This is a title set through Javascript",
+		isWarning: false
 	},
 
 	// any custom methods we write should be nested within the "methods" object:
@@ -59,7 +60,9 @@ var app = new Vue({
 			this.names.push(this.newName);
 			this.newName = '';
 		},
-		isWarning() { true }
+		toggleClass() { 
+			this.isWarning = !this.isWarning;
+		}
 	},
 
 });
