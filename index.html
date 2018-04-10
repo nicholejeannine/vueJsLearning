@@ -6,29 +6,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 </head>
 
 <body>
 <div id="app" class="container">
-	<div class="row">
+	<tabs>
+		<!-- Use v-bind (shortcut is just the colon) to specify that we want a boolean for the selected attribute, not just the string "true" -->
+		<tab name="About Us" :selected="true">
+			<h1>Here is the content for the about us tab.</h1>
+		</tab>
+
+		<tab name="About Our Culture">
+			<h1>Here is the content for the about our culture tab.</h1>
+		</tab>
+
+		<tab name="About Our Vision">
+			<h1>Here is the content for the about our vision tab.</h1>
+		</tab>
+	</tabs>
+
+<!-- 	<div class="row">
 		<div class="col-lg-offset-5 col-lg-6">
 			<button @click="showModal=true" class="btn btn-lg btn-primary">Show Modal</button>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-lg-offset-3 col-lg-6">
-			<!-- Custom event, close. If my modal announces that it has closed, then we can update showModal to be false. -->
+			Custom event, close. If my modal announces that it has closed, then we can update showModal to be false.
 			<my-modal v-if="showModal" @close="showModal = false">This uses a slot, not a property.</my-modal>
 		</div>
-	</div>
+	</div> -->
 </div>
 
-<script src="modal.js"></script>
+<!-- <script src="modal.js"></script> -->
+<script src="tabs.js"></script>
 </body>
 
 </html>
