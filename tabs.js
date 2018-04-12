@@ -1,11 +1,12 @@
 Vue.component('tabs', {
 	// in our template we will create a custom function to set the is-active tab on the class. We will call "selectTab" and pass the tab as an argument.
+	// special functions like @click take an optional second argument, which is the event ($event)
 	template: `
 	<div>
 		<div class="tabs">
  	 		<ul>
     			<li v-for="tab in tabs" :class="{'is-active': tab.isActive}">
-    				<a href="#" @click="selectTab(tab)">{{tab.name}}</a>
+    				<a :href="tab.href" @click="selectTab(tab)">{{tab.name}}</a>
     			</li>
   			</ul>
 		</div>
@@ -50,7 +51,7 @@ Vue.component('tabs', {
 
 Vue.component('tab', {
 
-	template: `<div><slot></slot></div>`,
+	template: `<div v-show="isActive"><slot></slot></div>`,
 	// you must be explicit about the properties you pass in.
 	// if you don't define the properties, they won't be available under the $vm0.$children.
 	// can require props, set defaults
@@ -61,6 +62,13 @@ Vue.component('tab', {
 	data(){
 		return {
 			isActive: false
+		}
+	},
+	// computed property for the herf tag
+	computed: {
+		href() {
+			// changes it to lowercase and replaces spaces globally with a dash.
+			return '#' + this.name.toLowerCase().replace(/ /g, '-');
 		}
 	},
 	mounted() {
