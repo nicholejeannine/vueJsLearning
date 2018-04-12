@@ -16,19 +16,10 @@ ini_set('include_path', get_include_path() . PATH_SEPARATOR . __DIR__);
 
 <body>
 <div id="app" class="container">
+<?php include "views/modal.html";?>
 <?php include "views/tabs.html";?>
 
-<!-- 	<div class="row">
-		<div class="col-lg-offset-5 col-lg-6">
-			<button @click="showModal=true" class="btn btn-lg btn-primary">Show Modal</button>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-lg-offset-3 col-lg-6">
-			Custom event, close. If my modal announces that it has closed, then we can update showModal to be false.
-			<my-modal v-if="showModal" @close="showModal = false">This uses a slot, not a property.</my-modal>
-		</div>
-	</div> -->
+
 </div>
 
 <!-- <script src="modal.js"></script> -->
