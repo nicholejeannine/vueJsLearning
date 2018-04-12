@@ -16,14 +16,16 @@ ini_set('include_path', get_include_path() . PATH_SEPARATOR . __DIR__);
 
 <body>
 <div id="app" class="container">
-<?php include "views/modal.html";?>
-<?php include "views/tabs.html";?>
+<?//php include "views/modal.html";?>
+<?//php include "views/tabs.html";?>
+<?php include "views/customEventsCoupon.html";?>
 
 
 </div>
 
 <!-- <script src="modal.js"></script> -->
-<script src="js/tabs.js"></script>
+<!-- <script src="js/tabs.js"></script> -->
+<script src="js/customEventsCoupon.js"></script>
 </body>
 
 </html>
