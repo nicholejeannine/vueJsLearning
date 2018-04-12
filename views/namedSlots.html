@@ -1,0 +1,18 @@
+<modal>
+	<!-- If we use div slot="header" here, we have a situation where a div is nested in a p-tag. We don't really want that. So we could use whatever we DO want, for instance an h1 tag
+	<h1 slot="header">
+		Title
+	</h1>
+ 	-->
+ 	<!-- In this situation, I don't really want ANY tag in here, I just want straight text. For these situations, you can use the template tag: -->
+ 	<template slot="header">My Title</template>
+ 	<template slot="content">This is my modal content.</template>
+ 	<template slot="footer">
+ 		<button class="button is-success">Save changes</button>
+      	<button class="button">Cancel</button>
+     </template>
+ 	<!-- You don't necessarily need a second slot - for example if you want the content to be the default slot,  and the header to be optional, just use a regular slot tag, without a name, for the content, create a named slot for the header, and do this (the content will default to the unamed <slot></slot> tag.)
+	<template slot="header">My Title</template>
+	This is my modal content.
+ 	-->
+</modal>

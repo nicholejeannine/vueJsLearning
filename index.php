@@ -19,13 +19,15 @@ ini_set('include_path', get_include_path() . PATH_SEPARATOR . __DIR__);
 <?//php include "views/modal.html";?>
 <?//php include "views/tabs.html";?>
 <?php //include "views/customEventsCoupon.html";?>
-<?php include "views/eventDispatcher.html";?>
+<?php //include "views/eventDispatcher.html";?>
+<?php include "views/namedSlots.html";?>
 
 </div>
 
 <!-- <script src="modal.js"></script> -->
 <!-- <script src="js/tabs.js"></script> -->
-<script src="js/eventDispatcher.js"></script>
+<!-- <script src="js/eventDispatcher.js"></script> -->
+<script src="js/namedSlots.js"></script>
 </body>
 
 </html>
