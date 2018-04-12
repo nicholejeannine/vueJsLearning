@@ -11,10 +11,14 @@ Vue.component('coupon', {
 
 new Vue({
 	el: '#app',
+	data: {
+		couponApplied: false
+	}
 	// on "applied" event, notify THE ROOT ELEMENT and run the metbod (ON THE ROOT ELEMENT) called "onCouponApplied"
 	methods: {
 		onCouponApplied(){
 			console.log("It was applied");
+			this.couponApplied = true;
 		}
 	}
 });
