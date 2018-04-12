@@ -12,8 +12,9 @@ Vue.component('coupon', {
 new Vue({
 	el: '#app',
 	data: {
+		// let's only show the element if the coupon has been applied.
 		couponApplied: false
-	}
+	},
 	// on "applied" event, notify THE ROOT ELEMENT and run the metbod (ON THE ROOT ELEMENT) called "onCouponApplied"
 	methods: {
 		onCouponApplied(){

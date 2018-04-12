@@ -1,3 +1,5 @@
 <!-- v-on:applied="onCouponApplied" is the same as @applied="onCouponApplied" .... the latter is just a shortcut method to declare a custom method. Similar to @onclick in the tabs lesson. -->
 <!-- What we are trying to accomplish here is custom Events - when the coupon has been applied (e.g., something has changed on THIS component), we want the root element (the Vue app) to be notified, so that it can perform some action (e.g., flash a message to the user) -->
 <coupon v-on:applied="onCouponApplied"></coupon>
+<h1 v-if="couponApplied">Hey! You can only see this if the coupon has been applied!!</h1>
+
