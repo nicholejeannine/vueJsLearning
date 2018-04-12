@@ -1,3 +1,7 @@
+<?php 
+ini_set('display_errors', 1);
+ini_set('include_path', get_include_path() . PATH_SEPARATOR . __DIR__);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,20 +16,7 @@
 
 <body>
 <div id="app" class="container">
-	<tabs>
-		<!-- Use v-bind (shortcut is just the colon) to specify that we want a boolean for the selected attribute, not just the string "true" -->
-		<tab name="About Us" :selected="true">
-			<h1>Here is the content for the about us tab</h1>
-		</tab>
-
-		<tab name="About Our Culture">
-			<h1>Here is the content for the about our culture tab.</h1>
-		</tab>
-
-		<tab name="About Our Vision">
-			<h1>Here is the content for the about our vision tab.</h1>
-		</tab>
-	</tabs>
+<?php include "views/tabs.html";?>
 
 <!-- 	<div class="row">
 		<div class="col-lg-offset-5 col-lg-6">
@@ -41,7 +32,7 @@
 </div>
 
 <!-- <script src="modal.js"></script> -->
-<script src="tabs.js"></script>
+<script src="js/tabs.js"></script>
 </body>
 
 </html>
