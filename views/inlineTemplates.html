@@ -1,0 +1,12 @@
+<!-- Sometimes for a particular page you need some behavior, but it's not a SPA, it just needs some behavior. We can use a (nonreusable) "one-off" component. Such as a progress page. We want to do that but still have our html nested within. We want something like: -->
+<!-- We want this inline, not declared as a "template" inside our view component. We can do this by using the inline-template attribute-->
+<!-- THE VUE DOCUMENTATION recommends you store templates in your javascript and not really use this approach; however, Mr Way says you might get a lot of use out of this for server-side applications so "be thoughtful in your approach" -->
+<progress-view inline-template>
+	<!-- This is treated like a template, even though it's inline, so we must have exactly one root element,  per the regular Vue.js rules. So we would not be able to have two sibling elements such as a h1 and a p tag; however, we can wrap them in a single div -->
+	<div>
+		<h1>Your progress through this course is {{completionRate}}%</h1>
+
+		<!-- Because we have added completionRate to the data in the Vue component, we can use a simple inline approach like on click, add 10 to the completionRate and it will trigger. -->
+		<p><button @click="completionRate += 10">Update Completion Rate</button></p>
+	</div>
+</progress-view>
