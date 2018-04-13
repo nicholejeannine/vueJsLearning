@@ -18,13 +18,18 @@ export default {
 }
 
 </script>
-// make it green so we know if it's there
+// make it green so we know if it's there. 
 <style>
 
 .box {
 	background: green; 
 	padding: 10px;
 	border: 1px solid black;
+	color: white;
+	width: 50%;
+	margin: 10px auto;
+	text-align: center;
+	border-radius: 4px;
 }
 
 </style>
