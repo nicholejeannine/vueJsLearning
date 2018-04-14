@@ -1,0 +1,18 @@
+	<!-- Vue supports something called "event modifiers". In this case, when we submit the form, we want to prevent the default action (submitting the form) and run our custom "onSubmit" method. If we try like @submit="onSubmit", it will run that method, but then the regular default form submit action will trigger, which is NOT what we want. 
+	So the event modifiers: you add a period and a view-supported modifier (e.g, @submit.once if you only want to submit a thing once.  In our case we want to prevent default, so it looks like this (@submit.prevent="onSubmit")) -->
+<form method="POST" action="/projects" @submit.prevent="onSubmit">
+	<div class="control">
+		<label for="name" class="label">Project Name</label>
+		<input required type="text" id="name" name="name" class="input" v-model="name">
+	</div>
+
+	<div class="control">
+		<label for="description" class="label">Project Description</label>
+		<!-- ADD THE REQUIRED TAGS! It is free front-end HTML5 validation! Use it! It's free! -->
+		<input required type="text" id="description" class="input" v-model="description"/>
+	</div>
+
+	<div class="control">
+		<button class="button is-primary">Create</button>
+	</div>
+</form>
