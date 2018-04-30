@@ -13,6 +13,10 @@ class Errors {
 
 	record(errors){
 		this.errors = errors;
+	}
+
+	clear(field) {
+		delete this.errors[field];
 	}	
 };
 
