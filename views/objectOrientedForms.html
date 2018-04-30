@@ -4,23 +4,23 @@
 	<!-- NOTE: This assumes a Laravel backend which I have not bothered to build into this project. The Laravel validator would return the errors -->
 
 	<!-- Move the @keydown event handler to the form itself so we don't have to put it on every single field.  $event.target.name will return the attribute 'name' for the target of the event (e.g., the name of the field that received the keydown) -->
-<form method="POST" action="/projects" @submit.prevent="onSubmit" @keydown="errors.clear($event.target.name)">
+<form method="POST" action="/projects" @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
 	<div class="control">
 		<label for="name" class="label">Project Name</label>
-		<input type="text" id="name" name="name" class="input" v-model="name">
-		<span v-if="errors.has('name')" class="help is-danger" v-text="errors.get('description')"></span>
+		<input type="text" id="name" name="name" class="input" v-model="form.name">
+		<span v-if="form.errors.has('name')" class="help is-danger" v-text="form.errors.get('name')"></span>
 	</div>
 
 	<div class="control">
 		<label for="description" class="label">Project Description</label>
 		<!-- ADD THE REQUIRED TAGS! It is free front-end HTML5 validation! Use it! It's free! -->
-		<input type="text" id="description" class="input" v-model="description"/>
-		<!-- For errors we want to display the first error - which would be at errors.name[0] - but if errors is empty, this will return as undefined. -->
-		<span v-if="errors.has('description')" class="help is-danger" v-text="errors.get('name')"></span>
+		<input type="text" id="description" class="input" v-model="form.description"/>
+		<!-- For errors we want to display the first error - which would be at form.errors.name[0] - but if errors is empty, this will return as undefined. -->
+		<span v-if="form.errors.has('description')" class="help is-danger" v-text="form.errors.get('description')"></span>
 	</div>
 
 	<div class="control">
 		<!-- If there are any errors, disable the submit button -->
-		<button class="button is-primary" :disabled="errors.any()">Create</button>
+		<button class="button is-primary" :disabled="form.errors.any()">Create</button>
 	</div>
 </form>

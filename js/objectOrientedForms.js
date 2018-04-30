@@ -16,7 +16,12 @@ class Errors {
 	}
 
 	clear(field) {
-		delete this.errors[field];
+		if (field){
+			delete this.errors[field];
+		}
+		else {
+			this.errors = {}
+		}
 	}	
 
 	has(field){
@@ -30,39 +35,74 @@ class Errors {
 	}
 };
 
+
+class Form {
+
+	constructor(data){
+		this.originalData = data;
+		// this.data = data; // we could do it this way but then in order to access each field, we'd have to do this.data.name. That's annoying.
+		// instead, let's loop through the data array and assign each field as a property on the form itself so we can just do this.name, this.description
+		for (let field in data){
+			this[field] = data[field];
+		}
+
+		this.errors = new Errors();
+	}
+
+	data(){
+		// this.name and this.description - but we want this to be dynamic. And we can't just fetch ALL the properties, because we have errors as well as other things we might assign. (?)
+		// Jeffrey Way's solution:
+		let data = Object.assign({}, this); // this clones the object. It would have {name, description, originalData, errors}
+		delete data.originalData;
+		delete data.errors;
+		return data;
+	}
+
+	reset() {
+
+		for (let field in this.originalData){
+			this[field] = '';
+		}
+	}
+
+	submit(requestType, url){
+		axios[requestType](url, this.data())
+		// when this.onFail is called, the "this" is rebound and will no longer refer to our form instance. Because, javascript. So, we can bind the "this" back to the form like so:
+
+		.then(this.onSuccess.bind(this))
+		// why don't we have to pass the error into the onFail call??
+		.catch(this.onFail.bind(this));
+	}
+
+	onSuccess(response){
+		alert(reesponse, " is the response after onSubmit");
+		this.reset(); // this works, we can test it by putting it in the onFail method - the onSuccess method will not work without the Laravel backend.
+		this.errors.clear();
+	}
+
+	onFail(error){
+		if (error.response && error.response.data){
+			this.errors.record(error.response.data)
+		}
+	}
+}
+
+
+
 new Vue({
 	el: '#app', 
 	data: {
-		name: '',
-		description: '',
-		errors: new Errors()
+		form: new Form({
+			name: '',
+			description: ''
+		})
 	},
 	methods: {
 		onSubmit(){
-			// at this point we would want to use axios to submit a post request:
-			axios.post('/projects', this.$data)
-			// this.$data is the same as: {
-			// 	name: this.name,
-			// 	description: this.description
-			// });
-			.then(this.onSuccess) // why don't we have to pass the response?
-			.catch(error => {
-				// original way before adding the Errors class:
-				// if there is an error, add it to this.errors in the data object above.
-				// this.errors = error.response.data
-				// console.log(error.response.data);
-
-				// after adding the Errors class:
-				this.errors.record(error.response.data);
-			})
+			this.form.submit('post', '/projects');
 		},
 		onSuccess(response) {
-			alert("We would return response.data.message if this was returned from the backend. This method will now clear out the input fields.");
-			// clear the form inputs
-			this.name = '';
-			this.description = '';
-
-			// in the next episode we will change this method to use a form object so we can do something like form.reset() instead of manually clearing out each field.
+			form.reset();
 		}
 	}
 });
