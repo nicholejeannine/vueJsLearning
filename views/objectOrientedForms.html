@@ -2,10 +2,12 @@
 	So the event modifiers: you add a period and a view-supported modifier (e.g, @submit.once if you only want to submit a thing once.  In our case we want to prevent default, so it looks like this (@submit.prevent="onSubmit")) -->
 
 	<!-- NOTE: This assumes a Laravel backend which I have not bothered to build into this project. The Laravel validator would return the errors -->
-<form method="POST" action="/projects" @submit.prevent="onSubmit">
+
+	<!-- Move the @keydown event handler to the form itself so we don't have to put it on every single field.  $event.target.name will return the attribute 'name' for the target of the event (e.g., the name of the field that received the keydown) -->
+<form method="POST" action="/projects" @submit.prevent="onSubmit" @keydown="errors.clear($event.target.name)">
 	<div class="control">
 		<label for="name" class="label">Project Name</label>
-		<input type="text" id="name" name="name" class="input" v-model="name" @keydown="errors.clear('name')">
+		<input type="text" id="name" name="name" class="input" v-model="name">
 		<span class="help is-danger" v-text="errors.get('description')"></span>
 	</div>
 
