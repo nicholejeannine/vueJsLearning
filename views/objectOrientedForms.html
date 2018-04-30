@@ -8,7 +8,7 @@
 	<div class="control">
 		<label for="name" class="label">Project Name</label>
 		<input type="text" id="name" name="name" class="input" v-model="name">
-		<span class="help is-danger" v-text="errors.get('description')"></span>
+		<span v-if="errors.has('name')" class="help is-danger" v-text="errors.get('description')"></span>
 	</div>
 
 	<div class="control">
@@ -16,10 +16,11 @@
 		<!-- ADD THE REQUIRED TAGS! It is free front-end HTML5 validation! Use it! It's free! -->
 		<input type="text" id="description" class="input" v-model="description"/>
 		<!-- For errors we want to display the first error - which would be at errors.name[0] - but if errors is empty, this will return as undefined. -->
-		<span class="help is-danger" v-text="errors.get('name')"></span>
+		<span v-if="errors.has('description')" class="help is-danger" v-text="errors.get('name')"></span>
 	</div>
 
 	<div class="control">
-		<button class="button is-primary">Create</button>
+		<!-- If there are any errors, disable the submit button -->
+		<button class="button is-primary" :disabled="errors.any()">Create</button>
 	</div>
 </form>
