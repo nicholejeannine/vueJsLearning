@@ -72,6 +72,11 @@ class Form {
 		this.errors.clear();
 	}
 
+	// here is an alternate way to do the post request, as opposed to the clunky axios[requestType](url, this.data()) within the Promise returned in the submit method.
+	// Jeffrey Way would use this style in his own projects.
+	post(url) {
+		return this.submit('POST', url);
+	}
 
 	// form.submit('POST', '/endpoint' => returns a promise)
 	submit(requestType, url){
@@ -115,7 +120,7 @@ new Vue({
 	},
 	methods: {
 		onSubmit(){
-			this.form.submit('post', '/projects')
+			this.form.post('/projects')
 			// this wouldn't work without creating the promise in the Form.onSuccess method above - since it returns a promise, calling "resolve" will trigger this "then" method.
 			.then(data => console.log(data))
 			.catch(error => console.log(error));
