@@ -50,40 +50,56 @@ class Form {
 	}
 
 	data(){
-		// this.name and this.description - but we want this to be dynamic. And we can't just fetch ALL the properties, because we have errors as well as other things we might assign. (?)
-		// Jeffrey Way's solution:
-		let data = Object.assign({}, this); // this clones the object. It would have {name, description, originalData, errors}
-		delete data.originalData;
-		delete data.errors;
+		// cleaner way to assign properties (vs. cloning the data object as before)
+		let data = {};
+
+		// loop through the original data, which is passed in the Vue instance data object (name and descritpion, in this case).
+		// filter through name and description; for each we are essentially saying data.name = this.name, data.description = this.description
+		for (let property in this.originalData){
+
+			data[property] = this[property];
+		}
 		return data;
+	
 	}
 
 	reset() {
-
+		// clear fields
 		for (let field in this.originalData){
 			this[field] = '';
 		}
-	}
-
-	submit(requestType, url){
-		axios[requestType](url, this.data())
-		// when this.onFail is called, the "this" is rebound and will no longer refer to our form instance. Because, javascript. So, we can bind the "this" back to the form like so:
-
-		.then(this.onSuccess.bind(this))
-		// why don't we have to pass the error into the onFail call??
-		.catch(this.onFail.bind(this));
-	}
-
-	onSuccess(response){
-		alert(reesponse, " is the response after onSubmit");
-		this.reset(); // this works, we can test it by putting it in the onFail method - the onSuccess method will not work without the Laravel backend.
+		// clear errors
 		this.errors.clear();
 	}
 
-	onFail(error){
-		if (error.response && error.response.data){
-			this.errors.record(error.response.data)
-		}
+
+	// form.submit('POST', '/endpoint' => returns a promise)
+	submit(requestType, url){
+		return new Promise((resolve, reject) => {
+			// the axios call returns a promise - that is what allows us to do .then and .catch - above we are doing it manually.
+			axios[requestType](url, this.data())
+			.then(response => {
+				this.onSuccess(response.data);
+				// when we call resolve, the onSubmit "then" method will be triggered.
+				resolve(response.data); 
+			})
+			.catch(error => {
+				this.onFail(error.response.data);
+				reject(error.response.data);
+			})
+			
+
+		});
+
+	}
+
+	onSuccess(data){
+		alert(data.message, " is the response after onSubmit");
+		this.reset(); // this works, we can test it by putting it in the onFail method - the onSuccess method will not work without the Laravel backend.
+	}
+
+	onFail(errors){
+		this.errors.record(errors);
 	}
 }
 
@@ -99,7 +115,10 @@ new Vue({
 	},
 	methods: {
 		onSubmit(){
-			this.form.submit('post', '/projects');
+			this.form.submit('post', '/projects')
+			// this wouldn't work without creating the promise in the Form.onSuccess method above - since it returns a promise, calling "resolve" will trigger this "then" method.
+			.then(data => console.log(data))
+			.catch(error => console.log(error));
 		},
 		onSuccess(response) {
 			form.reset();
